@@ -170,7 +170,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap'])
                * the modal element if the modal does not contain an autofocus element.
                */
               if (inputWithAutofocus) {
-                inputWithAutofocus.focus();
+                $timeout(function() { inputWithAutofocus.focus(); }, 0, false);
               } else {
                 element[0].focus();
               }
