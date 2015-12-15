@@ -28,6 +28,12 @@ describe('$uibModal', function () {
           elem.focus();
         }
       };
+    }).directive('handleEvents', function() {
+      return {
+        link: function(scope, elem, attrs) {
+          elem.on(attrs.handleEvents, function() { scope.$digest(); });
+        }
+      };
     });
   }));
 
@@ -419,7 +425,7 @@ describe('$uibModal', function () {
 
     it('should focus on the element that has autofocus attribute when the modal is open/reopen and the animations have finished', function() {
       function openAndCloseModalWithAutofocusElement() {
-        var modal = open({template: '<div><input type="text" id="auto-focus-element" autofocus></div>'});
+        var modal = open({template: '<div><input type="text" id="auto-focus-element" autofocus handle-events="focus"></div>'});
         $animate.flush();
         $rootScope.$digest();
         expect(angular.element('#auto-focus-element')).toHaveFocus();
